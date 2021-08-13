@@ -1,0 +1,36 @@
+.container{
+   background-color: #171717;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;;
+  h1{
+      margin: 0;
+      color: white;
+      margin-left: 16px;
+      cursor: pointer;
+  }
+  h1:hover{
+      color: #F1F1F1;
+      border-bottom: 1px solid #FFFFD3;
+      
+  }
+  .menu{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ul{
+          list-style: none;
+          display: flex;
+          li{
+              a{
+                  text-decoration: none;
+                  align-items: center;
+                  padding: 16px;
+                  color: white;
+              }
+          }
+      }
+  }
+
+}
