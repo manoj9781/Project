@@ -1,0 +1,29 @@
+.home-container {
+  padding: 16px;
+  .form-control {
+      text-align: center;
+    input {
+      border: 0 solid transparent;
+      padding: 8px 0;
+      text-indent: 35px;
+      width: 40%;
+      background: #f5f4f4;
+      color: black;
+      line-height: 1.7;
+      border-radius: 30px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    input:hover {
+      box-shadow: 4px 4px 8px 2px gray;
+      background-color: white;
+    }
+    input:focus-within {
+      box-shadow: 4px 4px 8px 2px gray;
+      background-color: white;
+    }
+    input:focus {
+      outline: none;
+    }
+  }
+}
