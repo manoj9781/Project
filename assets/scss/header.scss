@@ -1,0 +1,12 @@
+
+.navbar li {
+  list-style: none;
+}
+
+.navbar li a{
+    color: teal;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    margin: 16px;
+}
