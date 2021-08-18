@@ -3,19 +3,20 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/users');
 
 passport.use(new LocalStrategy(
-    function (username, password, done) {
-        User.findOne({ username: email }, function (err, user) {
+    {
+        usernameField:'email',
+    },
+    function (email, password, done) {
+        User.findOne({ email: email }, function (err, user) {
             if (err) {
                 console.log("Error in finding the user");
                 return done(err);
             }
-            if (!user) {
+            if (!user || user.password != password) {
+                console.log("Invalid Username/Password");
                 return done(null, false);
             }
-            if (!user.verifyPassword(password)) {
-                return done(null, false);
-                
-            }
+            return done(null, user);
         });
     }
 ));
@@ -37,5 +38,21 @@ passport.deserializeUser(function (id, done) {
         return done(null, user);
     })
 });
+
+passport.checkAuthentication = (request, response, next) => {
+    if (request.isAuthenticated()) {
+        return next();
+    }
+    return response.render('/users/sign-in');
+}
+
+passport.setAuthencticatedUser = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        //req.user contains the current signed in user fron the session cookie 
+        // we are just sending this to locals from the views
+        res.locals.user = req.user;
+    } 
+    next(); 
+}
 
 module.exports = passport;

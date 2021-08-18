@@ -5,6 +5,12 @@ const db = require('./config/mongoose');
 const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
 
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
+
+
 app.use(sassMiddleware({
     src: './assets/scss',
     dest: './assets/css',
@@ -29,6 +35,22 @@ app.set('layout extractScripts', true);
 //Setup up view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+app.use(session({
+    name: 'Prediction',
+    secret: 'Something',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100),
+    }
+}
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthencticatedUser);
 
 //Use express Router 
 app.use('/', require('./routes'));

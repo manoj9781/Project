@@ -1,3 +1,4 @@
+const { response } = require('express');
 const User = require('../models/users');
 module.exports.profile = (request, response) => {
     return response.render('profile', {
@@ -47,4 +48,8 @@ module.exports.createUser = (request, response) => {
         }
     });
 };
+
+module.exports.createSession = (request, response) => {
+    return response.redirect('/');
+}
 
