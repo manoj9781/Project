@@ -9,20 +9,24 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+//Mongo store is used to store the session cookie in the db
 
+const MongoStore = require('connect-mongo');
 
-app.use(sassMiddleware({
+app.use(
+  sassMiddleware({
     src: './assets/scss',
     dest: './assets/css',
     debug: true,
     outputStyle: 'extended',
-    prefix: '/css'
-}));
+    prefix: '/css',
+  })
+);
 
-// Middleware 
+// Middleware
 app.use(express.urlencoded());
 
-// Static function is used to access the local files css images and js 
+// Static function is used to access the local files css images and js
 app.use(express.static('./assets'));
 
 //Use express Layouts
@@ -36,29 +40,36 @@ app.set('layout extractScripts', true);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use(session({
+app.use(
+  session({
     name: 'Prediction',
     secret: 'Something',
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (1000 * 60 * 100),
-    }
-}
-));
+      maxAge: 1000 * 60 * 100,
+    },
+    store: MongoStore.create({
+      mongoUrl: 'mongodb://localhost/projectDevelopment',
+      autoRemove: 'disabled',
+    }),
+    function(err) {
+      console.log(err || 'connect-mongodb setup ok');
+    },
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthencticatedUser);
 
-//Use express Router 
+//Use express Router
 app.use('/', require('./routes'));
 
 app.listen(port, function (err) {
-    if (err) {
-        console.log("Error in running the server");
-
-    }
-    console.log("Server is up and runnnig on port ", port);
-})
+  if (err) {
+    console.log('Error in running the server');
+  }
+  console.log('Server is up and runnnig on port ', port);
+});
