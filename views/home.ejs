@@ -1,8 +1,19 @@
-<script src="https://kit.fontawesome.com/b40c9e99dc.js" crossorigin="anonymous"></script>
+<script
+  src="https://kit.fontawesome.com/b40c9e99dc.js"
+  crossorigin="anonymous"
+></script>
 <div class="home-container">
-    <div class="form-control">
-        <form action="" method="post">
-             <input type="text"  name="search_stock" placeholder="Search Stock" required>
-        </form>
-    </div>
+  <div class="form-control">
+    <% if(locals.user){%>
+    <form action="" method="post">
+      <input
+        type="text"
+        name="search_stock"
+        placeholder="Search Stock"
+        required
+      />
+    </form>
+
+    <%} %>
+  </div>
 </div>
