@@ -53,3 +53,8 @@ module.exports.createSession = (request, response) => {
     return response.redirect('/');
 }
 
+module.exports.destroySession = (request, response) => {
+    request.logout();
+    return response.redirect('/');
+}
+
