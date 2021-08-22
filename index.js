@@ -12,6 +12,10 @@ const passportLocal = require('./config/passport-local-strategy');
 //Mongo store is used to store the session cookie in the db
 
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
+const customMiddleware = require('./config/middleware');
+
+const Noty = require('noty');
 
 app.use(
   sassMiddleware({
@@ -63,6 +67,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthencticatedUser);
+
+app.use(flash());
+app.use(customMiddleware.setFlash);
 
 //Use express Router
 app.use('/', require('./routes'));
