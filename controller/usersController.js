@@ -38,9 +38,9 @@ module.exports.createUser = (request, response) => {
         if (err) {
           console.log('Error in creating the User');
           return;
-          }
-  request.flash('success', 'User created Succesfully');
-          
+        }
+        request.flash('success', 'User created Succesfully');
+
         return response.redirect('/users/sign-in');
       });
     } else {

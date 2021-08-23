@@ -21,3 +21,7 @@
       background-color: white; }
     .home-container .form-control input:focus {
       outline: none; }
+    .home-container .form-control .icon {
+      color: lightgrey;
+      margin-left: -48px;
+      align-items: center; }
