@@ -30,12 +30,14 @@ module.exports.createUser = (request, response) => {
   }
   User.findOne({ email: request.body.email }, function (err, user) {
     if (err) {
+      request.flash('error', err);
       console.log('Error in finding the user');
       return;
     }
     if (!user) {
       User.create(request.body, function (err, user) {
         if (err) {
+          request.flash('error', err);
           console.log('Error in creating the User');
           return;
         }
